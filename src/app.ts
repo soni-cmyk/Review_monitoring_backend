@@ -18,7 +18,8 @@ app.use(
     origin: [
       "http://localhost:5173", //for vite dev server
       "http://localhost:3000", //for local testing with react dev server
-      "https://review-monitoring-full-stack.vercel.app" //for production client
+      "https://review-monitoring-full-stack.vercel.app", //for production client,
+        /\.vercel\.app$/,
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
