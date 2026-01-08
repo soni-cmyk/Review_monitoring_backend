@@ -1,23 +1,18 @@
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
-let mongo: MongoMemoryServer;
+let mongo: MongoMemoryServer | null = null;
 
 beforeAll(async () => {
   mongo = await MongoMemoryServer.create();
-  const uri: string = mongo.getUri();
+  const uri = mongo.getUri();
   await mongoose.connect(uri);
-}, 60000);
-
-afterEach(async () => {
-  const collections = mongoose.connection.collections;
-  for (const key in collections) {
-    const collection = collections[key];
-    await collection.deleteMany({});
-  }
 }, 60000);
 
 afterAll(async () => {
   await mongoose.connection.close();
-  await mongo.stop();
+
+  if (mongo) {
+    await mongo.stop();
+  }
 }, 60000);
