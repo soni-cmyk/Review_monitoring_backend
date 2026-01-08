@@ -15,7 +15,11 @@ const app = express();
    ======================= */
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: [
+      "http://localhost:5173", //for vite dev server
+      "http://localhost:3000", //for local testing with react dev server
+      "https://review-monitoring-full-stack.vercel.app" //for production client
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
