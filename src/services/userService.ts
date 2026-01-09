@@ -16,18 +16,36 @@ export const registerUserService = async (data: {
 }) => {
   const { firstName, lastName, email, password, mobile, role } = data;
 
+  // hash password
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  // create user
   const user = await User.create({
     firstName,
     lastName,
     email,
     password: hashedPassword,
     mobile,
-    role: role || "user", // default role
+    role: role || "user",
   });
 
-  return user;
+  // ⭐ generate JWT after signup
+  const token = jwt.sign(
+    {
+      userId: user._id,
+      role: user.role,
+    },
+    process.env.JWT_SECRET as string,
+    { expiresIn: "7d" }
+  );
+
+  // return everything needed by frontend
+  return {
+    token,
+    role: user.role,
+    userId: user._id as Types.ObjectId,
+    user,
+  };
 };
 
 /* =====================================================
