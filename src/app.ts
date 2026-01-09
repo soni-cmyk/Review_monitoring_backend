@@ -7,6 +7,7 @@ import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import adminRoutes from "./routes/fakeReviewsRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
 
 const app = express();
 
@@ -50,5 +51,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/banners", bannerRoutes);
+
 
 export default app;
