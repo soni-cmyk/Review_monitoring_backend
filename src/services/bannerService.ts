@@ -20,3 +20,48 @@ export const toggleBannerStatusService = async (id: string) => {
   await banner.save();
   return banner;
 };
+
+/* ===============================
+   UPDATE BANNER
+================================ */
+export const updateBannerService = async (
+  id: string,
+  data: {
+    title?: string;
+    description?: string;
+    link?: string;
+    buttonText?: string;
+    buttonLink?: string;
+    isActive?: boolean;
+  },
+  file?: Express.Multer.File
+) => {
+  const updateData: {
+    title?: string;
+    description?: string;
+    link?: string;
+    buttonText?: string;
+    buttonLink?: string;
+    isActive?: boolean;
+    imageUrl?: string;
+  } = {
+    title: data.title,
+    description: data.description,
+    link: data.link,
+    buttonText: data.buttonText,
+    buttonLink: data.buttonLink,
+    isActive: data.isActive,
+  };
+
+  // Update image only if new file uploaded
+  if (file) {
+    updateData.imageUrl = `/uploads/products/${file.filename}`;
+  }
+  const banner = await Banner.findByIdAndUpdate(id, updateData, {
+    new: true,
+  });
+  if (!banner) {
+    throw new Error("Banner not found");
+  }
+  return banner;
+};

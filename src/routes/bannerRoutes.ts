@@ -5,6 +5,7 @@ import {
   getBanners,
   deleteBanner,
   toggleBannerStatus,
+  updateBanner,
 } from "../controllers/bannerController.js";
 
 const router = Router();
@@ -20,5 +21,8 @@ router.delete("/:id", deleteBanner);
 
 // PATCH toggle active/inactive
 router.patch("/:id/toggle", toggleBannerStatus);
+
+// PUT update banner
+router.put("/:id", upload.single("image"), updateBanner);
 
 export default router;
