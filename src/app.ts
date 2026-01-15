@@ -10,6 +10,7 @@ import adminRoutes from "./routes/fakeReviewsRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
 import logoRoutes from "./routes/logoRoutes.js";
 import templateRoutes from "./routes/templateRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 const app = express();
 
@@ -57,5 +58,6 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/banners", bannerRoutes);
 app.use("/api/logos", logoRoutes);
 app.use("/api/templates", templateRoutes);
+app.use("/api/categories", categoryRoutes);
 
 export default app;
