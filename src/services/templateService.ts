@@ -21,3 +21,13 @@ export const getPageBySlugService = async (
 ): Promise<IPage | null> => {
   return await Page.findOne({ slug });
 };
+
+export const getAllPagesService = async (): Promise<IPage[]> => {
+  return await Page.find();
+};
+
+export const deletePageBySlugService = async (
+  slug: string
+): Promise<{ deletedCount?: number }> => {
+  return await Page.deleteOne({ slug });
+}
