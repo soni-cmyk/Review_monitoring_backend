@@ -16,6 +16,7 @@ export const createProductService = async (
 ) => {
   const { name, desc, sku, supplierId } = data;
 
+
   if (!name || !sku || !supplierId) {
     throw new Error("Required fields missing");
   }
@@ -23,14 +24,15 @@ export const createProductService = async (
   if (!file) {
     throw new Error("Product image is required");
   }
-
+  
   return await Product.create({
     name,
     desc,
     sku,
     supplierId,
-    image: {
-      url: `/uploads/products/${file.filename}`,
+     image: {
+      url: file.path,                  //  Cloudinary URL
+      publicId: (file as any).filename, //  Cloudinary public_id
       originalName: file.originalname,
     },
   });
@@ -153,7 +155,7 @@ export const updateProductService = async (
 
   if (file) {
     updateData.image = {
-      url: `/uploads/products/${file.filename}`,
+      url: file.path,
       originalName: file.originalname,
     };
   }

@@ -23,14 +23,14 @@ export const uploadLogo = async (req: Request, res: Response) => {
       logoHeight,
       isActive = true,
     } = req.body;
-
+    const imageUrl = req.file.path;
     const logo = await createLogoService({
       link,
       logoAlt,
       logoWidth: logoWidth ? Number(logoWidth) : undefined,
       logoHeight: logoHeight ? Number(logoHeight) : undefined,
 
-      logoUrl: `/uploads/products/${req.file.filename}`,
+      logoUrl: imageUrl,
       logoFileName: req.file.originalname,
       logoMimeType: req.file.mimetype,
       logoSize: req.file.size,

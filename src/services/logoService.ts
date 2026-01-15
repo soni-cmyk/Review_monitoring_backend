@@ -70,10 +70,10 @@ export const updateLogoService = async (
     logoPublicId: data.logoPublicId,
     isActive: data.isActive,
   };
-
+   
   // If a new logo file is uploaded, update logo-related fields
   if (file) {
-    updateData.logoUrl = `/uploads/products/${file.filename}`;
+    updateData.logoUrl = file.path;;
     updateData.logoFileName = file.originalname;
     updateData.logoMimeType = file.mimetype;
     updateData.logoSize = file.size;
