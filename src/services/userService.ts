@@ -79,6 +79,7 @@ export const loginUserService = async (data: {
   return {
     token,
     role: user.role,
+    user,
     userId: user._id as Types.ObjectId,
   };
 };

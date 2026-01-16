@@ -78,6 +78,7 @@ export const loginUser = async (
       token: result.token,
       role: result.role,
       userId: result.userId,
+      user: result.user
     });
   } catch (error) {
       const err = error as Error;
