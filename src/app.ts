@@ -59,5 +59,6 @@ app.use("/api/banners", bannerRoutes);
 app.use("/api/logos", logoRoutes);
 app.use("/api/templates", templateRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/subcategories", categoryRoutes);
 
 export default app;
