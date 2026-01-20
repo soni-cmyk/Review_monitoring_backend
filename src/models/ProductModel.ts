@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 export const SUPPLIERS = ["SUP1", "SUP2", "SUP3"] as const;
 
@@ -19,7 +19,9 @@ export interface ProductDocument extends Document {
   desc?: string;
   sku: string;
   image: ProductImage;
-  supplierId: string;
+  supplierId: (typeof SUPPLIERS)[number];
+  categoryId: Types.ObjectId;
+  subCategoryIds: Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -62,11 +64,27 @@ const productSchema = new Schema<ProductDocument>(
       enum: SUPPLIERS,
       required: true,
     },
+
+    categoryId: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
+
+    subCategoryIds: [
+      {
+        type: Schema.Types.ObjectId,
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
+
+/* Optional but recommended */
+productSchema.index({ categoryId: 1 });
+productSchema.index({ subCategoryIds: 1 });
 
 const Product = model<ProductDocument>("Product", productSchema);
 

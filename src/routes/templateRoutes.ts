@@ -9,6 +9,7 @@ import {
 const router = Router();
 
 router.post("/", savePageController);
+router.put("/:slug", savePageController);
 router.get("/:slug", getPageController);
 router.get("/", getAllPagesController);
 router.delete("/:slug", deletePageController);
